@@ -53,4 +53,23 @@ map.on('load', () => {
             'circle-color': '#007cbf'
         }
     });
+
+    map.addSource('ct-tileset',{
+        'type': 'vector',
+        'url': 'https://studio.mapbox.com/tilesets/kshoester.cely0sw5'
+    });
+
+    map.addLayer({
+        'id': 'buildings-polygon',
+        'type': 'fill',
+        'source': 'ct-tileset',
+        'paint': {
+            'fill-color': '#888888',
+            'fill-opacity': 0.4,
+            'fill-outline-color': 'black'
+        },
+        'source-layer': 'torontoct-1hftgt'
+    },
+        'uoft-buildings'
+    );
 });
