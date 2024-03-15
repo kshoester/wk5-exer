@@ -1,5 +1,4 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3Nob2VzdGVyIiwiYSI6ImNsdG9jOXN3djBoMnYyaW1zYnRuZ3VkYzYifQ.Z976OphNTmOc_8gG7O6khQ';
-
 const map = new mapboxgl.Map({
     container: 'my-map',
     style: 'mapbox://styles/mapbox/streets-v12',
@@ -56,15 +55,15 @@ map.on('load', () => {
 
     map.addSource('ct-tileset',{
         'type': 'vector',
-        'url': 'https://studio.mapbox.com/tilesets/kshoester.cely0sw5'
+        'url': 'mapbox://kshoester.cely0sw5'
     });
 
     map.addLayer({
-        'id': 'buildings-polygon',
+        'id': 'census-tracts',
         'type': 'fill',
         'source': 'ct-tileset',
         'paint': {
-            'fill-color': '#888888',
+            'fill-color': 'a61c1c',
             'fill-opacity': 0.4,
             'fill-outline-color': 'black'
         },
@@ -72,4 +71,5 @@ map.on('load', () => {
     },
         'uoft-buildings'
     );
+
 });

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Add a vector tile source</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoia3Nob2VzdGVyIiwiYSI6ImNsdG9jOXN3djBoMnYyaW1zYnRuZ3VkYzYifQ.Z976OphNTmOc_8gG7O6khQ';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/light-v11',
+        zoom: 13,
+        center: [-122.447303, 37.753574]
+    });
+
+    map.on('load', () => {
+        map.addSource('ct-tileset',{
+        'type': 'vector',
+        'url': 'mapbox://kshoester.cely0sw5'
+    });
+
+        map.addLayer({
+        'id': 'census-tracts',
+        'type': 'fill',
+        'source': 'ct-tileset',
+        'paint': {
+            'fill-color': 'a61c1c',
+            'fill-opacity': 0.4,
+            'fill-outline-color': 'black'
+        },
+        'source-layer': 'torontoct-1hftgt'
+    },
+        'uoft-buildings'
+    );
+
+        map.addSource('mapbox-terrain', {
+            type: 'vector',
+            url: 'mapbox://mapbox.mapbox-terrain-v2'
+        });
+        map.addLayer(
+            {
+                'id': 'terrain-data',
+                'type': 'line',
+                'source': 'mapbox-terrain',
+                'source-layer': 'contour',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#ff69b4',
+                    'line-width': 1
+                }
+            },
+            'road-label-simple' // Add layer below labels
+        );
+    });
+</script>
+
+</body>
+</html>
