@@ -38,4 +38,19 @@ map.on('load', () => {
             'circle-color': '#B42222'
         }
     });
+
+    map.addSource('buildings-data', {
+        type: 'geojson',
+        data: 'https://kshoester.github.io/wk5-exer/wk5-data/buildings.geojson'
+    });
+
+    map.addLayer({
+        'id': 'buildings-point',
+        'type': 'circle',
+        'source': 'buildings-data',
+        'paint': {
+            'circle-radius': 5,
+            'circle-color': '#007cbf'
+        }
+    });
 });
